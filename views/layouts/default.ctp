@@ -17,9 +17,10 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html lang=en>
 <head>
+    <meta charset=utf-8>
 	<?php echo $this->Html->charset(); ?>
 	<title>
 		<?php __('CakePHP: the rapid development php framework:'); ?>
@@ -28,25 +29,39 @@
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.generic');
+		echo $this->Html->css('fluid.grid');
+		echo $this->Html->css('jquery-ui-1.8.13.custom');
+		echo $this->Html->css('ui.jqgrid');
+		//echo $this->Html->css('cake.generic');
+        
+        echo $html->script('jquery-1.6.1.min');
+        echo $html->script('jquery-ui-1.8.13.custom.min');
+        echo $html->script('i18n/grid.locale-en');
+        echo $html->script('jquery.jqGrid.min');
+        echo $html->script('Namespace');
 
 		echo $scripts_for_layout;
 	?>
 </head>
 <body>
-	<div id="container">
-		<div id="header">
-			<h1><?php echo $this->Html->link(__('CakePHP: the rapid development php framework', true), 'http://cakephp.org'); ?></h1>
+	<div id="container" class="container-24">
+		<div id="header" class="grid-24">
+			<h1><?php echo $this->Html->link(__('Kikkoman Bakery Management System', true), 'http://localhost/kikkoman/'); ?></h1>
 		</div>
-		<div id="content">
-
-			<?php echo $this->Session->flash(); ?>
+        <div class="clear"></div>
+        
+        <div class="grid-24" id="session-flash">
+  			<?php echo $this->Session->flash(); ?>
 			<?php echo $this->Session->flash('auth'); ?>
-
+        </div>
+        <div class="clear"></div>
+        
+		<div id="content" class="grid-24">
 			<?php echo $content_for_layout; ?>
-
 		</div>
-		<div id="footer">
+
+        <div class="clear"></div>
+		<div id="footer" class="grid-24">
 			<?php echo $this->Html->link(
 					$this->Html->image('cake.power.gif', array('alt'=> __('CakePHP: the rapid development php framework', true), 'border' => '0')),
 					'http://www.cakephp.org/',
@@ -55,6 +70,10 @@
 			?>
 		</div>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
+    
+    <div class="clear"></div>
+    <div class="grid-24">
+        <?php echo $this->element('sql_dump'); ?>
+    </div>	
 </body>
 </html>
