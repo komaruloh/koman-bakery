@@ -31,3 +31,22 @@
  * ...and connect the rest of 'Pages' controller's urls.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+    
+/*
+    Router::mapResources('users');
+    Router::parseExtensions();
+*/
+
+    Router::connect(
+        '/:controller/:id',
+        array('action' => 'view', '[method]' => 'GET'),
+        array('id' => '[\d]+')
+    );
+
+    Router::connect(
+        '/:controller/:id',
+        array('action' => 'edit', '[method]' => 'PUT'),
+        array('id' => '[0-9]+')
+    );
+    
+    Router::parseExtensions('json');

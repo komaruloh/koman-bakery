@@ -10,8 +10,12 @@ class UsersController extends AppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid user', true));
-			$this->redirect(array('action' => 'index'));
+            if(isset($this->params['id'])) {
+                $id = $this->params['id'];
+            } else {
+                $this->Session->setFlash(__('Invalid user', true));
+                $this->redirect(array('action' => 'index'));
+            }
 		}
 		$this->set('user', $this->User->read(null, $id));
 	}
@@ -59,14 +63,17 @@ class UsersController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	}
     
+/*
     function beforeFilter() {
         $this->Auth->allow('register');
     }
+*/
 
     /**
      *  The AuthComponent provides the needed functionality
      *  for login, so you can leave this function blank.
      */
+/*
     function login() {
     }
 
@@ -82,4 +89,5 @@ class UsersController extends AppController {
             }
         }
     }
+*/
 }

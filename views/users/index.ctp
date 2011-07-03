@@ -1,6 +1,6 @@
 <script type="text/javascript">
     Namespace.use('js.kikkoman.users.index');
-    js.kikkoman.users.index.shout('xxx');
+    //js.kikkoman.users.index.shout('xxx');
 </script>
 <div class="grid_8">
     &nbsp;
