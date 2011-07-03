@@ -48,5 +48,11 @@
         array('action' => 'edit', '[method]' => 'PUT'),
         array('id' => '[0-9]+')
     );
+
+    Router::connect(
+        '/:controller/:id',
+        array('action' => 'delete', '[method]' => 'DELETE'),
+        array('id' => '[0-9]+')
+    );
     
     Router::parseExtensions('json');

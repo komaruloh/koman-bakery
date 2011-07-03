@@ -32,11 +32,18 @@ class UsersController extends AppController {
 		}
 	}
 
-	function edit($id = null) {
-		if (!$id && empty($this->data)) {
+	function edit($id = null) {        
+        if($this->RequestHandler->isPut()) {
+            parse_str(file_get_contents("php://input"),$putVars);
+            $this->data = $putVars['data'];
+            $id = $this->params['id'];
+        }
+        
+        if ((!$id || !isset($this->params['id'])) && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid user', true));
 			$this->redirect(array('action' => 'index'));
 		}
+
 		if (!empty($this->data)) {
 			if ($this->User->save($this->data)) {
 				$this->Session->setFlash(__('The user has been saved', true));
@@ -51,7 +58,11 @@ class UsersController extends AppController {
 	}
 
 	function delete($id = null) {
-		if (!$id) {
+        if($this->RequestHandler->isDelete()) {
+            $id = $this->params['id'];die("vvvv".$id);
+        }
+        
+		if (!$id || isset($this->params['id'])) {
 			$this->Session->setFlash(__('Invalid id for user', true));
 			$this->redirect(array('action'=>'index'));
 		}
