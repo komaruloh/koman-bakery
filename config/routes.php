@@ -32,27 +32,71 @@
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
     
-/*
     Router::mapResources('users');
     Router::parseExtensions();
-*/
-
-    Router::connect(
-        '/:controller/:id',
-        array('action' => 'view', '[method]' => 'GET'),
-        array('id' => '[\d]+')
-    );
-
-    Router::connect(
-        '/:controller/:id',
-        array('action' => 'edit', '[method]' => 'PUT'),
-        array('id' => '[0-9]+')
-    );
-
-    Router::connect(
-        '/:controller/:id',
-        array('action' => 'delete', '[method]' => 'DELETE'),
-        array('id' => '[0-9]+')
-    );
     
-    Router::parseExtensions('json');
+   /**
+    * RESTful HTTP Method table  
+    * ------------------------------------------------------------------
+    * HTTP Method 	| URL.method 	        | Controller action invoked
+    * --------------+-----------------------+---------------------------
+    * GET 	        | /recipes.method       | RecipesController::index()
+    * GET 	        | /recipes/123.method   | RecipesController::view(123)
+    * POST 	        | /recipes.method       | RecipesController::add()
+    * PUT 	        | /recipes/123.method   | RecipesController::edit(123)
+    * DELETE        | /recipes/123.method   | RecipesController::delete(123)
+    * POST 	        | /recipes/123.method   | RecipesController::edit(123)
+    */ 
+    /**
+     *  Controller::index()
+     */
+//    Router::connect(
+//        '/:controller',
+//        array('action' => 'index', '[method]' => 'GET')
+//    );
+//
+//    /**
+//     *  Controller::view(id)
+//     */
+//    Router::connect(
+//        '/:controller/:id',
+//        array('action' => 'view', '[method]' => 'GET'),
+//        array('id' => '[\d]+')
+//    );
+//
+//    /**
+//     *  Controller::edit(id)
+//     */
+//    Router::connect(
+//        '/:controller/:id',
+//        array('action' => 'edit', '[method]' => 'POST'),
+//        array('id' => '[0-9]+')
+//    );
+//
+//    /**
+//     *  Controller::add()
+//     */
+//    Router::connect(
+//        '/:controller',
+//        array('action' => 'add', '[method]' => 'POST')
+//    );
+//
+//    /**
+//     *  Controller::edit(id)
+//     */
+//    Router::connect(
+//        '/:controller/:id',
+//        array('action' => 'edit', '[method]' => 'PUT'),
+//        array('id' => '[0-9]+')
+//    );
+//
+//    /**
+//     *  Controller::delete(id)
+//     */
+//    Router::connect(
+//        '/:controller/:id',
+//        array('action' => 'delete', '[method]' => 'DELETE'),
+//        array('id' => '[0-9]+')
+//    );
+//
+//    Router::parseExtensions('json');

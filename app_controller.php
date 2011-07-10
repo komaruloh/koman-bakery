@@ -35,4 +35,15 @@
 class AppController extends Controller {
     var $components = array('Session', 'RequestHandler');
     var $helpers = array('Html','Ajax','Javascript', 'Session');
+
+    function beforeFilter() {
+        parent::beforeFilter();
+
+        if(isset($this->RequestHandler)) {
+            if ($this->RequestHandler->isPut()) {
+                parse_str(file_get_contents("php://input"),$put_vars);
+                $this->data = $put_vars['data'];
+            }
+        }
+    }
 }

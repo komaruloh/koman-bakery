@@ -4,18 +4,14 @@ class UsersController extends AppController {
 	var $name = 'Users';
 
 	function index() {
-		$this->User->recursive = 0;
+        $this->User->recursive = 0;
 		$this->set('users', $this->paginate());
 	}
 
 	function view($id = null) {
 		if (!$id) {
-            if(isset($this->params['id'])) {
-                $id = $this->params['id'];
-            } else {
-                $this->Session->setFlash(__('Invalid user', true));
-                $this->redirect(array('action' => 'index'));
-            }
+			$this->Session->setFlash(__('Invalid user', true));
+			$this->redirect(array('action' => 'index'));
 		}
 		$this->set('user', $this->User->read(null, $id));
 	}
@@ -32,18 +28,11 @@ class UsersController extends AppController {
 		}
 	}
 
-	function edit($id = null) {        
-        if($this->RequestHandler->isPut()) {
-            parse_str(file_get_contents("php://input"),$putVars);
-            $this->data = $putVars['data'];
-            $id = $this->params['id'];
-        }
-        
-        if ((!$id || !isset($this->params['id'])) && empty($this->data)) {
+	function edit($id = null) {
+		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid user', true));
 			$this->redirect(array('action' => 'index'));
 		}
-
 		if (!empty($this->data)) {
 			if ($this->User->save($this->data)) {
 				$this->Session->setFlash(__('The user has been saved', true));
@@ -58,11 +47,7 @@ class UsersController extends AppController {
 	}
 
 	function delete($id = null) {
-        if($this->RequestHandler->isDelete()) {
-            $id = $this->params['id'];die("vvvv".$id);
-        }
-        
-		if (!$id || isset($this->params['id'])) {
+		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for user', true));
 			$this->redirect(array('action'=>'index'));
 		}
@@ -73,32 +58,4 @@ class UsersController extends AppController {
 		$this->Session->setFlash(__('User was not deleted', true));
 		$this->redirect(array('action' => 'index'));
 	}
-    
-/*
-    function beforeFilter() {
-        $this->Auth->allow('register');
-    }
-*/
-
-    /**
-     *  The AuthComponent provides the needed functionality
-     *  for login, so you can leave this function blank.
-     */
-/*
-    function login() {
-    }
-
-    function logout() {
-        $this->redirect($this->Auth->logout());
-    }
-    
-    function register() {
-        if ($this->data) {
-            if ($this->data['User']['password'] == $this->Auth->password($this->data['User']['password_confirm'])) {
-                $this->User->create();
-                $this->User->save($this->data);
-            }
-        }
-    }
-*/
 }
